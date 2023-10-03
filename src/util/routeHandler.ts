@@ -17,13 +17,24 @@ export class RouteHandler {
      * Creates a new instance of the RouteHandler class
      */
     constructor() {
+        this.testRoute();
         this.initRegisterController();
     }
 
     /**
-     * Initializes register controller based on the database type and loads routes.
+     * Configures a test route for checking server health.
      */
-    private initRegisterController(
+    private testRoute(): void {
+        this.router.get('/ping', (req, res) => {
+            res.status(200).json('pong');
+        });
+    }
+
+    /**
+     * Initializes the register controller based on the database type and loads routes.
+     * @param {RegisterService | null} registerService - Optional RegisterService instance to use for testing purposes.
+     */
+    public initRegisterController(
         registerService: RegisterService | null = null
     ): void {
         let database: RegisterDatabaseInterface;
@@ -44,8 +55,7 @@ export class RouteHandler {
     }
 
     /**
-     * Loads routes for a specific controller.
-     * @param {RegisterController} registerController - The HeroController instance.
+     * @param {RegisterController} registerController - loads route for the register controller.
      */
     private loadRegisterRoutes(registerController: RegisterController): void {
         this.router.use(

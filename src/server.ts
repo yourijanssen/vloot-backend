@@ -8,10 +8,25 @@ import { SQLDatabaseConfig } from './util/sql-database';
  * The main server class responsible for setting up the Express server.
  */
 class Server {
-    public app: express.Application;
+    private _app: express.Application;
+
+    /**
+     * Get the Express application instance.
+     */
+    public get app(): express.Application {
+        return this._app;
+    }
+
     private port: number;
     private database: SQLDatabaseConfig | SequelizeDatabaseConfig;
-    private routeHandler: RouteHandler = new RouteHandler();
+    private _routeHandler: RouteHandler = new RouteHandler();
+
+    /**
+     * Get the route handler instance.
+     */
+    public get routeHandler(): RouteHandler {
+        return this._routeHandler;
+    }
 
     /**
      * Creates a new Server instance.
@@ -20,7 +35,7 @@ class Server {
         /**
          * The Express application instance.
          */
-        this.app = express();
+        this._app = express();
 
         /**
          * The port number on which the server will listen.
@@ -79,7 +94,7 @@ class Server {
     /**
      * Starts the Express server.
      */
-    private async startServer() {
+    public async startServer() {
         // Synchronize the database before starting the server if it's a Sequelize database.
         if (this.database instanceof SequelizeDatabaseConfig) {
             await this.database.syncDatabase();
