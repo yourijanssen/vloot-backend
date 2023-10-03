@@ -23,26 +23,23 @@ export class RouteHandler {
      * Initializes register controller based on the database type and loads routes.
      */
     private initRegisterController(): void {
+        let registerService: RegisterService;
         if (process.env.DB_TYPE === 'sql') {
-            const registerService = new RegisterService(
-                new RegisterSqlDatabase()
-            );
-            const registerController = new RegisterController(registerService);
-            this.loadRoutes(registerController);
-        } else if (process.env.DB_TYPE === 'sequelize') {
-            const registerService = new RegisterService(
+            registerService = new RegisterService(new RegisterSqlDatabase());
+        } else {
+            registerService = new RegisterService(
                 new RegisterSequelizeDatabase()
             );
-            const registerController = new RegisterController(registerService);
-            this.loadRoutes(registerController);
         }
+        const registerController = new RegisterController(registerService);
+        this.loadRegisterRoutes(registerController);
     }
 
     /**
      * Loads routes for a specific controller.
      * @param {RegisterController} registerController - The HeroController instance.
      */
-    private loadRoutes(registerController: RegisterController): void {
+    private loadRegisterRoutes(registerController: RegisterController): void {
         this.router.use(
             '/register',
             new RegisterRoutes(registerController).getRegisterRouter()

@@ -1,48 +1,51 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import express from 'express';
-import config from 'dotenv';
-import { DatabaseConfig } from './util/database-config';
-import { UserModel } from './util/models';
 import { RouteHandler } from './util/routeHandler';
-
-// Initialize environment variables from a .env file.
-config.config();
+import { SequelizeDatabaseConfig } from './util/sequelize-database';
+import { SQLDatabaseConfig } from './util/sql-database';
 
 /**
- * @author Youri Janssen
  * The main server class responsible for setting up the Express server.
+ * @class Server
  */
 class Server {
-    private app: express.Application;
+    public app: express.Application;
     private port: number;
-    private database: DatabaseConfig;
+    private database: SQLDatabaseConfig | SequelizeDatabaseConfig;
+    private routeHandler: RouteHandler = new RouteHandler();
 
     /**
      * Creates a new Server instance.
-     * @param {RouteHandler} routeHandler - The route handler for setting up routes in the server.
      */
-    constructor(public routeHandler: RouteHandler) {
-        // Initialize the database configuration based on the DB_TYPE environment variable.
-        this.database = new DatabaseConfig(process.env.DB_TYPE!);
-
-        // Initialize Express application.
+    constructor() {
+        /**
+         * The Express application instance.
+         */
         this.app = express();
 
-        // Parse the port from the environment variable or use a default value.
-        this.port = this.parsePort(process.env.PORT);
+        /**
+         * The port number on which the server will listen.
+         */
+        this.port = parseInt(process.env.PORT || '3002', 10);
 
-        // Configure middleware and routes.
+        /**
+         * The database configuration based on the DB_TYPE environment variable.
+         */
+        this.database =
+            process.env.DB_TYPE === 'sql'
+                ? SQLDatabaseConfig.getInstance()
+                : SequelizeDatabaseConfig.getInstance();
+
+        /**
+         * The route handler for setting up routes in the server.
+         */
+        this.routeHandler = new RouteHandler();
+
+        // Configure middleware and route handler.
         this.configureMiddleware();
-        this.configureRoutes();
-    }
+        this.configureRouteHandler();
 
-    /**
-     * Parses the port from an environment variable or uses a default value.
-     * @param {string | undefined} portString - The port value from the environment variable.
-     * @returns {number} - The parsed port number.
-     */
-    private parsePort(portString: string | undefined): number {
-        return parseInt(portString || '3002', 10);
+        // Start the server after syncing the database.
+        this.startServer();
     }
 
     /**
@@ -72,58 +75,36 @@ class Server {
     }
 
     /**
-     * Configures routes for the Express app.
+     * Assigns the route handler for the Express app.
      */
-    private configureRoutes() {
+    private configureRouteHandler() {
         this.app.use(this.routeHandler.assignRouteHandler());
     }
 
     /**
-     * Configures Sequelize and starts the server using Sequelize as the database.
+     * Starts the Express server.
      */
-    public sequelizeConfig(): void {
-        const sequelize = this.database.sequelize;
+    private async startServer() {
+        // Synchronize the database before starting the server if it's a Sequelize database.
+        if (this.database instanceof SequelizeDatabaseConfig) {
+            await this.database.syncDatabase();
+        }
 
-        // Add models and sync the database.
-        sequelize!.addModels([UserModel]);
-        sequelize!
-            .sync() // { force: true }
-            .then(() => {
-                this.app.listen(this.port, () => {
-                    console.log(
-                        `Server is running on localhost:${this.port} using Sequelize`
-                    );
-                });
-            })
-            .catch((error: unknown) => {
-                console.error('Error syncing models:', error);
-            });
-    }
-
-    /**
-     * Starts the server using MySQL as the database.
-     */
-    public sqlConfig(): void {
+        // Start the Express server.
         this.app.listen(this.port, () => {
             console.log(
-                `Server is running on localhost:${this.port} using MySQL`
+                `Server is running on localhost:${this.port} using ${
+                    this.database instanceof SQLDatabaseConfig
+                        ? 'MySQL'
+                        : 'Sequelize'
+                }`
             );
         });
     }
 }
 
 /**
- * Starts the server based on the DB_TYPE environment variable.
+ * The server instance.
+ * @constant {Server}
  */
-function startServer(): void {
-    const applicationRoutes = new RouteHandler();
-    const server = new Server(applicationRoutes);
-
-    // Choose the database configuration based on the DB_TYPE environment variable.
-    process.env.DB_TYPE === 'sql'
-        ? server.sqlConfig()
-        : server.sequelizeConfig();
-}
-
-// Start the server.
-startServer();
+export const SERVER: Server = new Server();

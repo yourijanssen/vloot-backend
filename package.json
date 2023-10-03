@@ -8,7 +8,7 @@
   },
   "scripts": {
     "start": "ts-node-dev ./src/server.ts",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "npx mocha -r ts-node/register 'test/*.test.ts' --file test/mocha-setup.ts",
     "lint": "npx eslint \"src/**/*.{js,jsx,ts,tsx,html,css,scss}\" \"test/*.test.ts\" --quiet --fix",
     "format": "npx prettier \"src/**/*.{js,jsx,ts,tsx,html,css,scss}\" --write",
     "check": "npm run lint & npm run format"

@@ -13,7 +13,7 @@ import {
  */
 @Table({
     tableName: 'user', // Specify the table name
-    timestamps: false, // Enable timestamps (createdAt and updatedAt)
+    timestamps: true, // Enable timestamps (createdAt and updatedAt)
 })
 export class UserModel extends Model<UserModel> {
     @PrimaryKey
