@@ -1,5 +1,6 @@
 import express, { Router } from 'express';
 import { RegisterController } from '../controller/register';
+import { RegisterDatabaseInterface } from '../data/interfaces/register';
 import { RegisterSequelizeDatabase } from '../data/sequelize/register';
 import { RegisterSqlDatabase } from '../data/sql/register';
 import { RegisterService } from '../service/register';
@@ -22,16 +23,23 @@ export class RouteHandler {
     /**
      * Initializes register controller based on the database type and loads routes.
      */
-    private initRegisterController(): void {
-        let registerService: RegisterService;
+    private initRegisterController(
+        registerService: RegisterService | null = null
+    ): void {
+        let database: RegisterDatabaseInterface;
+
         if (process.env.DB_TYPE === 'sql') {
-            registerService = new RegisterService(new RegisterSqlDatabase());
+            database = new RegisterSqlDatabase();
         } else {
-            registerService = new RegisterService(
-                new RegisterSequelizeDatabase()
-            );
+            database = new RegisterSequelizeDatabase();
         }
-        const registerController = new RegisterController(registerService);
+
+        let usedService: RegisterService = new RegisterService(database);
+
+        if (registerService !== null) {
+            usedService = registerService;
+        }
+        const registerController = new RegisterController(usedService);
         this.loadRegisterRoutes(registerController);
     }
 

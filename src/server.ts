@@ -4,8 +4,8 @@ import { SequelizeDatabaseConfig } from './util/sequelize-database';
 import { SQLDatabaseConfig } from './util/sql-database';
 
 /**
+ * @author Youri Janssen
  * The main server class responsible for setting up the Express server.
- * @class Server
  */
 class Server {
     public app: express.Application;
@@ -34,11 +34,6 @@ class Server {
             process.env.DB_TYPE === 'sql'
                 ? SQLDatabaseConfig.getInstance()
                 : SequelizeDatabaseConfig.getInstance();
-
-        /**
-         * The route handler for setting up routes in the server.
-         */
-        this.routeHandler = new RouteHandler();
 
         // Configure middleware and route handler.
         this.configureMiddleware();
@@ -105,6 +100,5 @@ class Server {
 
 /**
  * The server instance.
- * @constant {Server}
  */
 export const SERVER: Server = new Server();
