@@ -22,8 +22,8 @@ export class UserModel extends Model<UserModel> {
     id!: number;
 
     @Column(DataType.STRING)
-    email!: string;
+    userMail!: string;
 
     @Column(DataType.STRING)
-    password!: string;
+    userPassword!: string;
 }

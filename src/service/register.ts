@@ -1,4 +1,5 @@
 import { RegisterDatabaseInterface } from '../data/interfaces/register';
+import { User } from '../model/user';
 
 /**
  * Service class for managing registration-related operations.
@@ -11,16 +12,34 @@ export class RegisterService {
      */
     public constructor(private registerDatabase: RegisterDatabaseInterface) {}
 
-    /**
-     * Creates a new user with the provided email and password.
-     * @param {string} email - The email address of the user.
-     * @param {string} password - The password of the user.
-     * @returns {Promise<number | undefined>} A promise that resolves to the ID of the created user or undefined if the operation fails.
-     */
     public async createUser(
-        email: string,
-        password: string
-    ): Promise<number | undefined> {
-        return await this.registerDatabase.createUser(email, password);
+        userMail: string,
+        userPassword: string
+    ): Promise<boolean | string[] | 'user_exists'> {
+        const user = User.createUser(userMail, userPassword);
+        const userValidation: string[] | null = user.validateUser();
+
+        const userExists: User | null = await this.getUserByMail(userMail);
+        if (userExists !== null) {
+            return 'user_exists';
+        }
+        if (userValidation === null && userExists === null) {
+            // Attempt to create the user in the database
+            return await this.registerDatabase.createUser(
+                userMail,
+                userPassword
+            );
+        } else {
+            return userValidation || [];
+        }
+    }
+
+    /**
+     * Retrieves a user by their email address from the database.
+     * @param {string} userMail - The email address of the user to retrieve.
+     * @returns {Promise<User | null>} A Promise that resolves with the user if found, or `null` if not found or an error occurs.
+     */
+    private getUserByMail(userMail: string): Promise<User | null> {
+        return this.registerDatabase.getUserByMail(userMail);
     }
 }

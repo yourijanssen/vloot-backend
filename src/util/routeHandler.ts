@@ -51,13 +51,13 @@ export class RouteHandler {
             usedService = registerService;
         }
         const registerController = new RegisterController(usedService);
-        this.loadRegisterRoutes(registerController);
+        this.loadRegisterAPI(registerController);
     }
 
     /**
      * @param {RegisterController} registerController - loads route for the register controller.
      */
-    private loadRegisterRoutes(registerController: RegisterController): void {
+    private loadRegisterAPI(registerController: RegisterController): void {
         this.router.use(
             '/register',
             new RegisterRoutes(registerController).getRegisterRouter()
