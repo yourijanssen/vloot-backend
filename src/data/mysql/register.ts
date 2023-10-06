@@ -1,13 +1,15 @@
 import { RegisterDatabaseInterface } from '../interfaces/register';
-import { User } from '../../model/user';
+import { User } from '../../business/model/user';
 import { FieldPacket, Pool, ResultSetHeader, RowDataPacket } from 'mysql2';
-import { SQLDatabaseConfig } from '../../util/sql-database';
+import { SQLDatabaseConfig } from '../../util/database/mysql/mysql';
 
 /**
+ * @author Youri Janssen
  * A class that implements the RegisterDatabaseInterface for MySQL-based registration operations.
  */
-export class RegisterSqlDatabase implements RegisterDatabaseInterface {
+export class RegisterMysqlDatabase implements RegisterDatabaseInterface {
     /**
+     * @author Youri Janssen
      * Creates a new user with the provided email and password in the MySQL database.
      * @param {string} userMail - The user's email address.
      * @param {string} userPassword - The user's password.
@@ -46,6 +48,7 @@ export class RegisterSqlDatabase implements RegisterDatabaseInterface {
     }
 
     /**
+     * @author Youri Janssen
      * Find a user by email address in the MySQL database.
      * @param {string} userMail - The email address to search for.
      * @returns {Promise<User | null>} A Promise that resolves with the user if found, or `null` if not found.

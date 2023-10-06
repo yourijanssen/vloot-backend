@@ -1,10 +1,10 @@
 import express, { Router } from 'express';
-import { RegisterController } from '../controller/register';
-import { RegisterDatabaseInterface } from '../data/interfaces/register';
-import { RegisterSequelizeDatabase } from '../data/sequelize/register';
-import { RegisterSqlDatabase } from '../data/sql/register';
-import { RegisterService } from '../service/register';
-import { RegisterRoutes } from './routes/register';
+import { RegisterController } from '../../controller/register';
+import { RegisterDatabaseInterface } from '../../data/interfaces/register';
+import { RegisterSequelizeDatabase } from '../../data/sequelize/register';
+import { RegisterMysqlDatabase } from '../../data/mysql/register';
+import { RegisterService } from '../../business/service/register';
+import { RegisterRoutes } from './register';
 
 /**
  * @author Youri Janssen
@@ -14,6 +14,7 @@ export class RouteHandler {
     public router: Router = express.Router();
 
     /**
+     * @author Youri Janssen
      * Creates a new instance of the RouteHandler class
      */
     constructor() {
@@ -22,6 +23,7 @@ export class RouteHandler {
     }
 
     /**
+     * @author Youri Janssen
      * Configures a test route for checking server health.
      */
     private testRoute(): void {
@@ -31,6 +33,7 @@ export class RouteHandler {
     }
 
     /**
+     * @author Youri Janssen
      * Initializes the register controller based on the database type and loads routes.
      * @param {RegisterService | null} registerService - Optional RegisterService instance to use for testing purposes.
      */
@@ -40,7 +43,7 @@ export class RouteHandler {
         let database: RegisterDatabaseInterface;
 
         if (process.env.DB_TYPE === 'sql') {
-            database = new RegisterSqlDatabase();
+            database = new RegisterMysqlDatabase();
         } else {
             database = new RegisterSequelizeDatabase();
         }
@@ -55,6 +58,7 @@ export class RouteHandler {
     }
 
     /**
+     * @author Youri Janssen
      * @param {RegisterController} registerController - loads route for the register controller.
      */
     private loadRegisterAPI(registerController: RegisterController): void {
@@ -65,6 +69,7 @@ export class RouteHandler {
     }
 
     /**
+     * @author Youri Janssen
      * Gets the Express Router instance with the application's routes loaded.
      * @returns {Router} The Express Router instance.
      */

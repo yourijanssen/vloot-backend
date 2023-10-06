@@ -1,13 +1,18 @@
-import { User } from '../../model/user';
-import { UserModel } from '../../util/models';
+import { User } from '../../business/model/user';
+import { UserModel } from '../../util/database/sequelize/models/user';
 import { RegisterDatabaseInterface } from '../interfaces/register';
 
 /**
  * @author Youri Janssen
+ * Represents a Sequelize-based database implementation for user registration.
  */
 export class RegisterSequelizeDatabase implements RegisterDatabaseInterface {
     /**
+     * @author Youri Janssen
      * Creates a new user with the provided email and password in the SQL database.
+     * @param {string} userMail - The user's email address.
+     * @param {string} userPassword - The user's password.
+     * @returns {Promise<boolean>} A Promise that resolves to `true` if the user was created successfully, or `false` on failure.
      */
     public async createUser(
         userMail: string,
@@ -33,6 +38,7 @@ export class RegisterSequelizeDatabase implements RegisterDatabaseInterface {
     }
 
     /**
+     * @author Youri Janssen
      * Find a user by email address.
      * @param {string} userMail - The email address to search for.
      * @returns {Promise<User | null>} A Promise that resolves with the user if found, or `null` if not found.

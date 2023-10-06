@@ -11,4 +11,5 @@ lint:
   script:
     - npm install --force
     - npm run check
+    - npm test
 

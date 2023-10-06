@@ -1,17 +1,28 @@
-import { RegisterDatabaseInterface } from '../data/interfaces/register';
+import { RegisterDatabaseInterface } from '../../data/interfaces/register';
 import { User } from '../model/user';
 
 /**
- * Service class for managing registration-related operations.
  * @author Youri Janssen
+ * Service class for managing registration-related operations.
  */
 export class RegisterService {
     /**
+     * @author Youri Janssen
      * Creates an instance of RegisterService.
      * @param {RegisterDatabaseInterface} registerDatabase - The database interface for registration-related database operations.
      */
     public constructor(private registerDatabase: RegisterDatabaseInterface) {}
 
+    /**
+     * @author Youri Janssen
+     * Creates a new user and registers them in the system.
+     * @param {string} userMail - The user's email address.
+     * @param {string} userPassword - The user's password.
+     * @returns {Promise<boolean | string[] | 'user_exists'>} A Promise that resolves to one of the following:
+     *   - `true` if the user was created successfully.
+     *   - An array of validation error messages if validation fails.
+     *   - `'user_exists'` if a user with the same email already exists.
+     */
     public async createUser(
         userMail: string,
         userPassword: string
@@ -35,6 +46,7 @@ export class RegisterService {
     }
 
     /**
+     * @author Youri Janssen
      * Retrieves a user by their email address from the database.
      * @param {string} userMail - The email address of the user to retrieve.
      * @returns {Promise<User | null>} A Promise that resolves with the user if found, or `null` if not found or an error occurs.

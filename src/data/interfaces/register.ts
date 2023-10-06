@@ -1,4 +1,4 @@
-import { User } from '../../model/user';
+import { User } from '../../business/model/user';
 
 /**
  * An interface for managing registration-related database operations.

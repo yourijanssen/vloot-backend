@@ -1,4 +1,4 @@
-import { RegisterService } from '../service/register';
+import { RegisterService } from '../business/service/register';
 import express from 'express';
 
 /**
@@ -7,12 +7,14 @@ import express from 'express';
  */
 export class RegisterController {
     /**
+     * @author Youri Janssen
      * Creates an instance of RegisterController.
      * @param {RegisterService} registerService - The service responsible for registration-related operations.
      */
-    constructor(private registerService: RegisterService) {}
+    public constructor(private registerService: RegisterService) {}
 
     /**
+     * @author Youri Janssen
      * Creates a new user based on the provided email and password.
      * @param {express.Request} request - The Express request object containing user data.
      * @param {express.Response} response - The Express response object to send the HTTP response.
