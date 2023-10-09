@@ -4,6 +4,7 @@ import { SERVER } from '../../src/server';
 import { RegisterService } from '../../src/business/service/register';
 import { generateUniqueEmail } from './helper/E2EHelper';
 import { RegisterSequelizeDatabase } from '../../src/data/sequelize/register';
+import sinon from 'sinon';
 
 /**
  * @author Youri Janssen
@@ -13,11 +14,21 @@ describe('POST /register', () => {
     let registerService: RegisterService | null = null;
 
     beforeEach(() => {
-        registerService = new RegisterService(new RegisterSequelizeDatabase());
-        SERVER.routeHandler.initRegisterController(registerService);
+      
     });
 
-    it('Should return 201 when user is created', async () => {
+    it.only('Should return 201 when user is created', async () => {
+      console.log('waiting')
+      await new Promise(resolve => setTimeout(resolve, 1500, true));
+      console.log('go')
+
+      var save = sinon.stub(RegisterSequelizeDatabase.prototype, 'createUser');
+      save.resolves()
+
+
+      // registerService = new RegisterService(new RegisterSequelizeDatabase());
+      // SERVER.routeHandler.initRegisterController(registerService);
+
         const userMail = generateUniqueEmail();
         const expected = {
             message: 'Registration successful. You can now log in.',

@@ -62,6 +62,7 @@ export class RouteHandler {
      * @param {RegisterController} registerController - loads route for the register controller.
      */
     private loadRegisterAPI(registerController: RegisterController): void {
+      console.log(registerController)
         this.router.use(
             '/register',
             new RegisterRoutes(registerController).getRegisterRouter()

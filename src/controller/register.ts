@@ -24,6 +24,7 @@ export class RegisterController {
         request: express.Request,
         response: express.Response
     ): Promise<void> {
+      console.log('controller called')
         // Extract user data from the request body
         const userMail = request.body.userMail;
         const userPassword = request.body.userPassword;

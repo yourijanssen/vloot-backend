@@ -18,6 +18,7 @@ export class RegisterSequelizeDatabase implements RegisterDatabaseInterface {
         userMail: string,
         userPassword: string
     ): Promise<boolean> {
+      console.log('seq called')
         const saltRounds = 10; // You can adjust the number of salt rounds as needed
 
         try {

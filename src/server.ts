@@ -94,9 +94,10 @@ class Server {
      * Starts the Express server.
      */
     public async startServer() {
+
         /* Synchronize the database before starting the server if it's a Sequelize database. */
         if (this.database instanceof SequelizeDatabaseConfig) {
-            await this.database.syncDatabase();
+            // await this.database.syncDatabase();
         }
 
         /* Start the Express server.*/

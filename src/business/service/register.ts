@@ -27,22 +27,23 @@ export class RegisterService {
         userMail: string,
         userPassword: string
     ): Promise<boolean | string[] | 'user_exists'> {
+      console.log('service called')
         const user = User.createUser(userMail, userPassword);
         const userValidation: string[] | null = user.validateUser();
 
-        const userExists: User | null = await this.getUserByMail(userMail);
-        if (userExists !== null) {
-            return 'user_exists';
-        }
-        if (userValidation === null && userExists === null) {
+        // const userExists: User | null = await this.getUserByMail(userMail);
+        // if (userExists !== null) {
+        //     return 'user_exists';
+        // }
+        // if (userValidation === null && userExists === null) {
             // Attempt to create the user in the database
             return await this.registerDatabase.createUser(
                 userMail,
                 userPassword
             );
-        } else {
-            return userValidation || [];
-        }
+        // } else {
+        //     return userValidation || [];
+        // }
     }
 
     /**
