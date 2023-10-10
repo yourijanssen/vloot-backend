@@ -12,7 +12,7 @@ export class TestEndpointSequelizeDatabase implements TestEndpointDatabaseInterf
      */
     public async getTestObject(
     ): Promise<BusinessTest> {
-        const testObject: SequelizeTest | null = await SequelizeTest.findOne({where: {message: "Hello, world!"}});
+        const testObject: SequelizeTest | null = (await SequelizeTest.findAll())[0];
         if (testObject !== null) {
             return this.convertSequelizeTestToBusinessTest(testObject);
         } else {
