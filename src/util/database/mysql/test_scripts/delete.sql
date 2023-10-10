@@ -1,0 +1,1 @@
+DELETE FROM test WHERE message = "Hi there! :)";
