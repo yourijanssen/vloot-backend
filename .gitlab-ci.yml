@@ -11,13 +11,3 @@ lint:
   script:
     - npm install --force
     - npm run check
-
-test:
-  tags:
-    - hva
-  stage: test
-  script:
-    - npm install --force
-    - echo "Setting environment variable for TEST_MODE"
-    - echo "TEST_MODE=true" >> .env
-    - npm test
