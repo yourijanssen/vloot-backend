@@ -17,6 +17,7 @@ test:
     - hva
   stage: test
   script:
+    - npm install --force
     - echo "Setting environment variable for TEST_MODE"
     - echo "TEST_MODE=true" >> .env
     - npm test
