@@ -2,8 +2,8 @@ import express, { Router } from 'express';
 import { RegisterController } from '../controller/register';
 import { RegisterDatabaseInterface } from '../data/interfaces/register';
 import { RegisterSequelizeDatabase } from '../data/sequelize/register';
-import { RegisterSqlDatabase } from '../data/sql/register';
-import { RegisterService } from '../service/register';
+import { RegisterMysqlDatabase } from '../data/mysql/register';
+import { RegisterService } from '../business/service/register';
 import { RegisterRoutes } from './routes/register';
 import { TestEndpointController } from '../controller/test_endpoint';
 import { TestEndpointRoutes } from './routes/test_endpoint';
@@ -19,6 +19,7 @@ export class RouteHandler {
     public router: Router = express.Router();
 
     /**
+     * @author Youri Janssen
      * Creates a new instance of the RouteHandler class
      */
     constructor() {
@@ -28,6 +29,7 @@ export class RouteHandler {
     }
 
     /**
+     * @author Youri Janssen
      * Configures a test route for checking server health.
      */
     private testRoute(): void {
@@ -37,33 +39,27 @@ export class RouteHandler {
     }
 
     /**
+     * @author Youri Janssen
      * Initializes the register controller based on the database type and loads routes.
-     * @param {RegisterService | null} registerService - Optional RegisterService instance to use for testing purposes.
      */
-    public initRegisterController(
-        registerService: RegisterService | null = null
-    ): void {
+    public initRegisterController(): void {
         let database: RegisterDatabaseInterface;
 
         if (process.env.DB_TYPE === 'sql') {
-            database = new RegisterSqlDatabase();
+            database = new RegisterMysqlDatabase();
         } else {
             database = new RegisterSequelizeDatabase();
         }
-
-        let usedService: RegisterService = new RegisterService(database);
-
-        if (registerService !== null) {
-            usedService = registerService;
-        }
+        const usedService: RegisterService = new RegisterService(database);
         const registerController = new RegisterController(usedService);
-        this.loadRegisterRoutes(registerController);
+        this.loadRegisterAPI(registerController);
     }
 
     /**
+     * @author Youri Janssen
      * @param {RegisterController} registerController - loads route for the register controller.
      */
-    private loadRegisterRoutes(registerController: RegisterController): void {
+    private loadRegisterAPI(registerController: RegisterController): void {
         this.router.use(
             '/register',
             new RegisterRoutes(registerController).getRegisterRouter()

@@ -2,16 +2,14 @@ import express, { Request, Response, Router } from 'express';
 import { RegisterController } from '../../controller/register';
 
 /**
- * Class for managing register-related routes.
  * @author Youri Janssen
+ * Class for managing register-related routes.
  */
 export class RegisterRoutes {
-    /**
-     * @property router is readonly because it should not be changed after initialization.
-     */
-    private readonly router: Router = express.Router();
+    private router: Router = express.Router();
 
     /**
+     * @author Youri Janssen
      * Creates an instance of RegisterRoutes.
      * @param {RegisterController} registerController - The controller for managing registration-related actions.
      */
@@ -20,6 +18,7 @@ export class RegisterRoutes {
     }
 
     /**
+     * @author Youri Janssen
      * Set up all register-related routes.
      */
     private setupRoutes(): void {
@@ -27,6 +26,7 @@ export class RegisterRoutes {
     }
 
     /**
+     * @author Youri Janssen
      * Handles the creation of a new user.
      * @param {Request} request - The Express request object.
      * @param {Response} response - The Express response object.
@@ -36,6 +36,7 @@ export class RegisterRoutes {
     };
 
     /**
+     * @author Youri Janssen
      * @returns {Router} The Express router for register-related routes.
      */
     public getRegisterRouter(): Router {

@@ -1,7 +1,7 @@
 import express from 'express';
-import { RouteHandler } from './util/routeHandler';
+import { SQLDatabaseConfig } from './util/database/mysql/mysql';
 import { SequelizeDatabaseConfig } from './util/database/sequelize/sequelize';
-import { SQLDatabaseConfig } from './util/sql-database';
+import { RouteHandler } from './util/routeHandler';
 
 /**
  * @author Youri Janssen
@@ -11,6 +11,7 @@ class Server {
     private _app: express.Application;
 
     /**
+     * @author Youri Janssen
      * Get the Express application instance.
      */
     public get app(): express.Application {
@@ -22,6 +23,7 @@ class Server {
     private _routeHandler: RouteHandler = new RouteHandler();
 
     /**
+     * @author Youri Janssen
      * Get the route handler instance.
      */
     public get routeHandler(): RouteHandler {
@@ -29,43 +31,45 @@ class Server {
     }
 
     /**
+     * @author Youri Janssen
      * Creates a new Server instance.
      */
     constructor() {
-        /**
-         * The Express application instance.
-         */
         this._app = express();
 
-        /**
-         * The port number on which the server will listen.
-         */
+        /* The port number on which the server will listen. */
         this.port = parseInt(process.env.PORT || '3002', 10);
 
-        /**
-         * The database configuration based on the DB_TYPE environment variable.
-         */
-        this.database =
-            process.env.DB_TYPE === 'sql'
-                ? SQLDatabaseConfig.getInstance()
-                : SequelizeDatabaseConfig.getInstance();
+        // Use an environment variable to determine if it's test mode
+        const isTestMode = process.env.TEST_MODE === 'true';
 
-        // Configure middleware and route handler.
+        // Depending on the mode, set the database instance
+        this.database =
+            isTestMode || process.env.DB_TYPE !== 'sql'
+                ? SequelizeDatabaseConfig.getInstance()
+                : SQLDatabaseConfig.getInstance();
+
+        /* Configure middleware and route handler. */
         this.configureMiddleware();
         this.configureRouteHandler();
 
-        // Start the server after syncing the database.
-        this.startServer();
+        // Conditionally execute syncDatabase based on test mode
+        if (!isTestMode && this.database instanceof SequelizeDatabaseConfig) {
+            this.startServerWithDatabaseSync();
+        } else {
+            this.startServer();
+        }
     }
 
     /**
+     * @author Youri Janssen
      * Configures middleware for the Express app.
      */
     private configureMiddleware() {
         this.app.use(express.json());
         this.app.use(express.urlencoded({ extended: true }));
 
-        // CORS headers configuration
+        /* CORS headers configuration */
         this.app.use((req, res, next) => {
             res.setHeader(
                 'Access-Control-Allow-Origin',
@@ -85,22 +89,27 @@ class Server {
     }
 
     /**
+     * @author Youri Janssen
      * Assigns the route handler for the Express app.
      */
     private configureRouteHandler() {
         this.app.use(this.routeHandler.assignRouteHandler());
     }
 
-    /**
-     * Starts the Express server.
-     */
-    public async startServer() {
-        // Synchronize the database before starting the server if it's a Sequelize database.
+    private async startServerWithDatabaseSync() {
+        /* Synchronize the database before starting the server if it's a Sequelize database. */
         if (this.database instanceof SequelizeDatabaseConfig) {
             await this.database.syncDatabase();
         }
 
-        // Start the Express server.
+        this.startServer();
+    }
+    /**
+     * @author Youri Janssen
+     * Starts the Express server.
+     */
+    public async startServer() {
+        /* Start the Express server.*/
         this.app.listen(this.port, () => {
             console.log(
                 `Server is running on localhost:${this.port} using ${
@@ -113,7 +122,5 @@ class Server {
     }
 }
 
-/**
- * The server instance.
- */
+/* The server instance. */
 export const SERVER: Server = new Server();

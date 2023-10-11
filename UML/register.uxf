@@ -1,0 +1,255 @@
+<diagram program="umletino" version="15.1"><zoom_level>6</zoom_level><help_text>Space for diagram notes</help_text><element><id>Relation</id><coordinates><x>1182</x><y>456</y><w>132</w><h>24</h></coordinates><panel_attributes>lt=&lt;-
+Post request from client</panel_attributes><additional_attributes>200;20;10;20</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>1416</x><y>444</y><w>72</w><h>18</h></coordinates><panel_attributes>_:RegisterController_</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1446</x><y>456</y><w>18</w><h>348</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;560</additional_attributes></element><element><id>Relation</id><coordinates><x>1452</x><y>486</y><w>162</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-
+request body</panel_attributes><additional_attributes>250;20;10;20</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>1602</x><y>498</y><w>12</w><h>48</h></coordinates><panel_attributes>
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1602</x><y>462</y><w>18</w><h>342</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;550</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>1572</x><y>450</y><w>72</w><h>18</h></coordinates><panel_attributes>_:RegisterService_</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1872</x><y>498</y><w>18</w><h>306</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;490</additional_attributes></element><element><id>Relation</id><coordinates><x>1608</x><y>492</y><w>174</w><h>24</h></coordinates><panel_attributes>lt=&lt;-
+validate request body</panel_attributes><additional_attributes>270;20;10;20</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>1842</x><y>486</y><w>72</w><h>18</h></coordinates><panel_attributes>_:Database_</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1938</x><y>354</y><w>108</w><h>474</h></coordinates><panel_attributes>lt=.
+Database
+fg=blue
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1452</x><y>714</y><w>162</w><h>24</h></coordinates><panel_attributes>lt=&lt;.
+true or false</panel_attributes><additional_attributes>10;20;250;20</additional_attributes></element><element><id>Relation</id><coordinates><x>1182</x><y>720</y><w>276</w><h>24</h></coordinates><panel_attributes>lt=&lt;.
+If true: Succes message &amp; status 201</panel_attributes><additional_attributes>10;20;440;20</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>1770</x><y>504</y><w>12</w><h>36</h></coordinates><panel_attributes>
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1770</x><y>468</y><w>18</w><h>336</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;540</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>1740</x><y>456</y><w>72</w><h>18</h></coordinates><panel_attributes>_:User_</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLFrame</id><coordinates><x>1128</x><y>354</y><w>918</w><h>474</h></coordinates><panel_attributes>HTTP POST: /Register</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1608</x><y>528</y><w>174</w><h>30</h></coordinates><panel_attributes>lt=&lt;.
+error message(s) or null
+</panel_attributes><additional_attributes>10;20;270;20</additional_attributes></element><element><id>UMLActor</id><coordinates><x>1158</x><y>384</y><w>42</w><h>66</h></coordinates><panel_attributes>Actor</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>1272</x><y>432</y><w>72</w><h>18</h></coordinates><panel_attributes>_:RegisterRoutes_</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>1302</x><y>468</y><w>12</w><h>30</h></coordinates><panel_attributes>
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1302</x><y>444</y><w>18</w><h>78</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;110</additional_attributes></element><element><id>Relation</id><coordinates><x>1308</x><y>480</y><w>150</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-
+request object</panel_attributes><additional_attributes>230;20;10;20</additional_attributes></element><element><id>UMLNote</id><coordinates><x>1698</x><y>378</y><w>198</w><h>42</h></coordinates><panel_attributes>@author Youri Janssen
+
+Sequence diagrams of the POST /register API
+
+
+bg=blue</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1992</x><y>540</y><w>18</w><h>264</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;420</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>1962</x><y>528</y><w>72</w><h>18</h></coordinates><panel_attributes>_:UserModel_</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>1446</x><y>492</y><w>12</w><h>60</h></coordinates><panel_attributes>
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1182</x><y>540</y><w>276</w><h>30</h></coordinates><panel_attributes>lt=&lt;.
+error message(s) and status 400
+</panel_attributes><additional_attributes>10;20;440;20</additional_attributes></element><element><id>Relation</id><coordinates><x>1452</x><y>534</y><w>162</w><h>24</h></coordinates><panel_attributes>lt=&lt;.
+error message(s)</panel_attributes><additional_attributes>10;20;250;20</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>1446</x><y>726</y><w>12</w><h>30</h></coordinates><panel_attributes>
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>1176</x><y>468</y><w>12</w><h>306</h></coordinates><panel_attributes>
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>648</x><y>180</y><w>102</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+Composition</panel_attributes><additional_attributes>150;20;10;20</additional_attributes></element><element><id>UMLNote</id><coordinates><x>594</x><y>0</y><w>246</w><h>174</h></coordinates><panel_attributes>COMPOSITION Relationship characteristics:
+
+Strong Ownership: The container class (whole) has a direct 
+responsibility for the creation and destruction of the component 
+class (part). The part objects belong exclusively to the container.
+
+Lifecycle Dependency: The lifecycle of the parts is closely tied to 
+the lifecycle of the whole. When the whole is created, its parts are
+ created. When the whole is destroyed, its parts are also 
+destroyed.
+
+Aggregation: Composition is a form of aggregation where the 
+parts are strongly associated with the whole. Aggregation 
+represents a weaker relationship where parts can exist 
+independently of the whole.
+--
+In this case the application would not be able function without either 
+the RegisterRoutes, RegisterController, RegisterService and the 
+implementation if the RegisterDatabaseInterface.
+
+
+bg=white
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>402</x><y>180</y><w>120</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;.
+Implements / Realizes</panel_attributes><additional_attributes>180;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>150</x><y>180</y><w>114</w><h>24</h></coordinates><panel_attributes>lt=&lt;.
+Dependency / Uses</panel_attributes><additional_attributes>170;20;10;20</additional_attributes></element><element><id>UMLNote</id><coordinates><x>102</x><y>96</y><w>228</w><h>78</h></coordinates><panel_attributes>DEPENDENCY Relationship:
+The dependent class uses the methods, attributes, types or other
+elements of the supplier class. This can be in the form of method
+calls, parameter types, property types, etc. 
+--
+In this case RegisterService uses the User for validation. 
+The database classes use the User for password hashing.
+bg=white
+
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>0</x><y>234</y><w>228</w><h>102</h></coordinates><panel_attributes>RegisterRoutes
+The RegisterRoutes class is responsable for handling and setting 
+up the /register HTTP routes and its conventions. 
+--
+RegisterController:
+The RegisterController class is responsible for receiving 
+and processing
+incoming HTTP requests on the /register route from the client 
+and generate appropriate responses. 
+It sets the appropriate status code in the response to convey 
+the outcome of the request.
+bg=blue
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>0</x><y>498</y><w>228</w><h>102</h></coordinates><panel_attributes>RegisterService:
+The RegisterService is responsible for handling business logic.
+In this cases validation of the e-mail and password + user
+existance.
+--
+User:
+TheUser class is responsable for creating a User instance. 
+It includes the business logic a user should adhere to.
+
+bg=yellow
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>0</x><y>732</y><w>228</w><h>150</h></coordinates><panel_attributes>RegisterDatabaseInterface:
+The use of the RegisterDatabaseInterface ensures that
+the database can easily be stubbed for testing purposes. The 
+RegisterService class doesn't need to know the exact implementation 
+of the database; it only requires an object that adheres to the 
+RegisterDatabaseInterface contract, which is in this case
+is either the RegisterSequelizeDatabase or the RegisterMysqlDatabase. 
+--
+RegisterSequelizeDatabase :
+The BikesRepository is responsible for handling data
+storage and retrieval operations. It uses the Bikes and Items
+Models (database tables) to do this. It uses the Bike interface to
+define the properties that a bike object should adhere to.
+
+
+bg=red
+
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>1110</x><y>246</y><w>168</w><h>72</h></coordinates><panel_attributes>The actor represents an 
+external entity that interacts 
+with the system we're modeling.
+It most cases this will be via
+a browser client.
+bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLActor</id><coordinates><x>1224</x><y>252</y><w>42</w><h>66</h></coordinates><panel_attributes>Actor</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1548</x><y>246</y><w>18</w><h>72</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;100</additional_attributes></element><element><id>UMLNote</id><coordinates><x>1440</x><y>228</y><w>138</w><h>90</h></coordinates><panel_attributes>The lifeline represents an
+individual participant in an 
+interaction, which could be 
+an object, an actor, or 
+a component.
+bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>1284</x><y>246</y><w>150</w><h>72</h></coordinates><panel_attributes>Activation refers to the period 
+of time during which an object 
+or participant is actively processing 
+a message or performing an action. 
+bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>1596</x><y>246</y><w>126</w><h>72</h></coordinates><panel_attributes>Messages are used to represent 
+interactions or communication 
+between lifelines (participants) 
+within a system.
+
+bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>1416</x><y>258</y><w>12</w><h>48</h></coordinates><panel_attributes>
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>1536</x><y>234</y><w>36</w><h>18</h></coordinates><panel_attributes>_:Object_</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>1728</x><y>222</y><w>138</w><h>96</h></coordinates><panel_attributes>Synchronous Message: 
+Represents a communication where 
+the message receiver processes the 
+request immediately and possibly 
+sends a response back to the sender 
+directly. 
+bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>1872</x><y>222</y><w>168</w><h>96</h></coordinates><panel_attributes>Asynchronous Message: 
+Represents a communication 
+where the message receiver starts an 
+asynchronous operation in response
+to the sender. While this occurs, other
+task or requests can continue processing.
+When the asynchronous operation completes,
+the receiver prepares a response to the sender.
+bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>2046</x><y>222</y><w>138</w><h>96</h></coordinates><panel_attributes>Return Message: 
+Represents the response 
+from the receiver to a 
+previously sent (a)synchronous 
+message. It indicates the completion 
+of an operation and the result 
+of that operation.
+bg=green</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1740</x><y>324</y><w>120</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-
+Synchronous message</panel_attributes><additional_attributes>180;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>1896</x><y>324</y><w>120</w><h>24</h></coordinates><panel_attributes>lt=&lt;-
+Asynchronous message</panel_attributes><additional_attributes>180;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>2064</x><y>324</y><w>114</w><h>24</h></coordinates><panel_attributes>lt=&lt;.
+return message</panel_attributes><additional_attributes>10;20;170;20</additional_attributes></element><element><id>Relation</id><coordinates><x>1176</x><y>438</y><w>18</w><h>366</h></coordinates><panel_attributes>lt=.</panel_attributes><additional_attributes>10;10;10;590</additional_attributes></element><element><id>Relation</id><coordinates><x>1182</x><y>744</y><w>276</w><h>24</h></coordinates><panel_attributes>lt=&lt;.
+If false: Server error message &amp; status 500</panel_attributes><additional_attributes>10;20;440;20</additional_attributes></element><element><id>UMLSpecialState</id><coordinates><x>1176</x><y>786</y><w>12</w><h>12</h></coordinates><panel_attributes>type=termination</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLSpecialState</id><coordinates><x>1602</x><y>786</y><w>12</w><h>12</h></coordinates><panel_attributes>type=termination</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLNote</id><coordinates><x>348</x><y>30</y><w>228</w><h>144</h></coordinates><panel_attributes>IMPLEMENTATION/REALIZATION Relationship characteristics:
+
+Interface: The source class in the implementation relationship is 
+usually an interface (or abstract class). This type of class defines 
+a contract or a set of methods that must be implemented by the 
+classes that realize them.
+
+Method Realization: The implementing class must provide 
+functional implementations for all the methods declared in the 
+interface or abstract class it is implementing. The signatures of 
+the methods in the implementing class must match those 
+specified in the interface or abstract class.
+--
+In this case the RegisterSequelizeDatabase or the 
+RegisterMysqlDatabase implements an realizes the 
+RegisterDatabaseInterface.
+
+bg=white
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>420</x><y>384</y><w>246</w><h>60</h></coordinates><panel_attributes>RegisterController
+--
+- registerService: registerService
+--
++ constructor(registerService: RegisterService) 
++ createUser(request: Request, response: Response): Promise&lt;void&gt;
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>426</x><y>534</y><w>252</w><h>72</h></coordinates><panel_attributes>RegisterService
+--
+- registerDatabase: RegisterDatabaseInterface
+--
++ constructor(registerDatabase: RegisterDatabaseInterface)
++ createUser(userMail: string,
+        userPassword: string): Promise&lt;boolean | string[] | 'user_exists'&gt;
+- getUserByMail(userMail: string): Promise&lt;User | null&gt; </panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>270</x><y>858</y><w>252</w><h>60</h></coordinates><panel_attributes>RegisterSequelizeDatabase
+--
++ createUser( userMail: string, userPassword: string): Promise&lt;boolean&gt;
++ getUserByMail(userMail: string): Promise&lt;User | null&gt; </panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>246</x><y>624</y><w>210</w><h>78</h></coordinates><panel_attributes>User
+--
+- userMail: string
+- userPassword: string 
+--
+- constructor(userMail: string, userPassword: string)
++ createUser(userMail: string, userPassword: string): User 
++ validateUser(): string[] | null
++ hashPassword(): Promise&lt;string&gt;</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>408</x><y>762</y><w>258</w><h>42</h></coordinates><panel_attributes>&lt;&lt;RegisterDatabaseInterface&gt;&gt;
+--
++ createUser( userMail: string, userPassword: string): Promise&lt;boolean&gt;
++ getUserByMail(userMail: string): Promise&lt;User | null&gt;   </panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>228</x><y>234</y><w>456</w><h>264</h></coordinates><panel_attributes>lt=.
+CONTROLLER
+fg=blue
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>228</x><y>732</y><w>600</w><h>198</h></coordinates><panel_attributes>lt=.
+DATA
+fg=red</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>228</x><y>498</y><w>534</w><h>234</h></coordinates><panel_attributes>lt=.
+BUSINESS
+fg=yellow
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>414</x><y>258</y><w>252</w><h>78</h></coordinates><panel_attributes>RegisterRoutes
+--
+- router: Router 
+- registerController: RegisterController
+--
++ constructor(registerController: RegisterController)       
+- setupRoutes(): void
+- createUser(request: Request, response: Response): Promise&lt;void&gt;
++ getRegisterRouter(): Router</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>390</x><y>798</y><w>156</w><h>72</h></coordinates><panel_attributes>lt=&lt;&lt;.
+Implements</panel_attributes><additional_attributes>240;10;240;60;10;60;10;100</additional_attributes></element><element><id>Relation</id><coordinates><x>534</x><y>330</y><w>60</w><h>66</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+Composition</panel_attributes><additional_attributes>10;10;10;90</additional_attributes></element><element><id>Relation</id><coordinates><x>534</x><y>438</y><w>60</w><h>108</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+Composition</panel_attributes><additional_attributes>10;10;10;160</additional_attributes></element><element><id>Relation</id><coordinates><x>534</x><y>600</y><w>60</w><h>174</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+Composition</panel_attributes><additional_attributes>10;10;10;270</additional_attributes></element><element><id>UMLClass</id><coordinates><x>306</x><y>798</y><w>60</w><h>18</h></coordinates><panel_attributes>UserModel</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>330</x><y>810</y><w>36</w><h>60</h></coordinates><panel_attributes>lt=&lt;.
+Uses</panel_attributes><additional_attributes>10;10;10;80</additional_attributes></element><element><id>Relation</id><coordinates><x>288</x><y>696</y><w>36</w><h>174</h></coordinates><panel_attributes>lt=&lt;.
+Uses</panel_attributes><additional_attributes>10;10;10;270</additional_attributes></element><element><id>Relation</id><coordinates><x>342</x><y>558</y><w>96</w><h>78</h></coordinates><panel_attributes>lt=&lt;.
+Uses</panel_attributes><additional_attributes>10;110;10;20;140;20</additional_attributes></element><element><id>UMLNote</id><coordinates><x>264</x><y>336</y><w>126</w><h>42</h></coordinates><panel_attributes>@author Youri Janssen
+
+Class Diagram of the /register API
+bg=blue
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>528</x><y>822</y><w>108</w><h>48</h></coordinates><panel_attributes>lt=.
+Implements</panel_attributes><additional_attributes>10;20;160;20;160;60</additional_attributes></element><element><id>UMLClass</id><coordinates><x>540</x><y>858</y><w>252</w><h>60</h></coordinates><panel_attributes>RegisterMysqlDatabase
+--
++ createUser( userMail: string, userPassword: string): Promise&lt;boolean&gt;
++ getUserByMail(userMail: string): Promise&lt;User | null&gt; </panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>1602</x><y>552</y><w>12</w><h>60</h></coordinates><panel_attributes>
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1608</x><y>546</y><w>276</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-
+check if user email exists</panel_attributes><additional_attributes>440;20;10;20</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>1872</x><y>558</y><w>12</w><h>48</h></coordinates><panel_attributes>
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>1992</x><y>564</y><w>12</w><h>30</h></coordinates><panel_attributes>
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1878</x><y>558</y><w>126</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-
+find email</panel_attributes><additional_attributes>190;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>1878</x><y>582</y><w>126</w><h>30</h></coordinates><panel_attributes>lt=&lt;.
+user or null
+</panel_attributes><additional_attributes>10;20;190;20</additional_attributes></element><element><id>Relation</id><coordinates><x>1608</x><y>594</y><w>276</w><h>30</h></coordinates><panel_attributes>lt=&lt;.
+user or null
+</panel_attributes><additional_attributes>10;20;440;20</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>1602</x><y>624</y><w>12</w><h>102</h></coordinates><panel_attributes>
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>1770</x><y>642</y><w>12</w><h>24</h></coordinates><panel_attributes>
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1452</x><y>600</y><w>162</w><h>30</h></coordinates><panel_attributes>lt=&lt;.
+user_exists
+</panel_attributes><additional_attributes>10;20;250;20</additional_attributes></element><element><id>Relation</id><coordinates><x>1182</x><y>618</y><w>276</w><h>30</h></coordinates><panel_attributes>lt=&lt;.
+error message and status 409
+</panel_attributes><additional_attributes>10;20;440;20</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>1446</x><y>612</y><w>12</w><h>18</h></coordinates><panel_attributes>
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1608</x><y>612</y><w>276</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-
+create user</panel_attributes><additional_attributes>440;20;10;20</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>1872</x><y>624</y><w>12</w><h>42</h></coordinates><panel_attributes>
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1776</x><y>630</y><w>108</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-
+hash password</panel_attributes><additional_attributes>10;20;160;20</additional_attributes></element><element><id>Relation</id><coordinates><x>1776</x><y>654</y><w>108</w><h>30</h></coordinates><panel_attributes>lt=&lt;.
+hashed password
+</panel_attributes><additional_attributes>160;20;10;20</additional_attributes></element><element><id>Relation</id><coordinates><x>1878</x><y>660</y><w>126</w><h>24</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-
+create user</panel_attributes><additional_attributes>190;20;10;20</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>1992</x><y>672</y><w>12</w><h>30</h></coordinates><panel_attributes>
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1878</x><y>690</y><w>126</w><h>30</h></coordinates><panel_attributes>lt=&lt;.
+true or false
+</panel_attributes><additional_attributes>10;20;190;20</additional_attributes></element><element><id>UMLGeneric</id><coordinates><x>1872</x><y>672</y><w>12</w><h>42</h></coordinates><panel_attributes>
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLSpecialState</id><coordinates><x>1992</x><y>786</y><w>12</w><h>12</h></coordinates><panel_attributes>type=termination</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLSpecialState</id><coordinates><x>1872</x><y>786</y><w>12</w><h>12</h></coordinates><panel_attributes>type=termination</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1608</x><y>702</y><w>276</w><h>30</h></coordinates><panel_attributes>lt=&lt;.
+true or false
+</panel_attributes><additional_attributes>10;20;440;20</additional_attributes></element><element><id>UMLSpecialState</id><coordinates><x>1770</x><y>786</y><w>12</w><h>12</h></coordinates><panel_attributes>type=termination</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLSpecialState</id><coordinates><x>1446</x><y>786</y><w>12</w><h>12</h></coordinates><panel_attributes>type=termination</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>450</x><y>690</y><w>270</w><h>180</h></coordinates><panel_attributes>lt=&lt;.
+Uses</panel_attributes><additional_attributes>10;20;430;20;430;280</additional_attributes></element></diagram>
