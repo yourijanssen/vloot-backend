@@ -15,7 +15,12 @@ export class RegisterMysqlDatabase implements RegisterDatabaseInterface {
      * @param {string} password - The user's password.
      * @returns {Promise<boolean>} A Promise that resolves with `true` if successful, or `false` if an error occurs.
      */
-    public async createUser(email: string, password: string): Promise<boolean> {
+    public async createUser(
+        email: string,
+        password: string,
+        type: Roles,
+        active: number
+    ): Promise<boolean> {
         const pool: Pool | undefined = SQLDatabaseConfig.pool;
         const saltRounds = 10; // You can adjust the number of salt rounds as needed
 
@@ -29,8 +34,8 @@ export class RegisterMysqlDatabase implements RegisterDatabaseInterface {
                 const [result]: [ResultSetHeader, FieldPacket[]] = await pool
                     .promise()
                     .execute<ResultSetHeader>(
-                        'INSERT INTO `user` (`email`, `password`, createdAt, updatedAt) VALUES (?, ?, NOW(), NOW())',
-                        [email, hashedPassword] // Use the hashed password
+                        'INSERT INTO `user` (`email`, `password`, `type`, `active`) VALUES (?, ?, ?, ?)',
+                        [email, hashedPassword, type, active] // Use the hashed password
                     );
 
                 if (result && result.affectedRows > 0) {

@@ -2,7 +2,7 @@ image: node:16
 
 stages:
   - lint
-  # - test
+  - test
 
 lint:
   tags:
@@ -11,5 +11,12 @@ lint:
   script:
     - npm install --force
     - npm run check
-    - npm test
 
+test:
+  tags:
+    - hva
+  stage: test
+  script:
+    - echo "Setting environment variable for TEST_MODE"
+    - echo "TEST_MODE=true" >> .env
+    - npm test
