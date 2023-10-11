@@ -1,0 +1,1 @@
+UPDATE test SET message = "Hi there! :)" WHERE message = "Hello, world!";
