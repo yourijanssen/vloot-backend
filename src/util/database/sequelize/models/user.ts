@@ -6,14 +6,15 @@ import {
     AutoIncrement,
     DataType,
 } from 'sequelize-typescript';
+import { Roles } from '../../../../business/model/user';
 
 /**
  * @author Youri Janssen
  * Represents the User model in the database.
  */
 @Table({
-    tableName: 'user', // Specify the table name
-    timestamps: true, // Enable timestamps (createdAt and updatedAt)
+    tableName: 'User', // Specify the table name
+    timestamps: false, // Enable timestamps (createdAt and updatedAt)
 })
 export class UserModel extends Model<UserModel> {
     @PrimaryKey
@@ -22,8 +23,14 @@ export class UserModel extends Model<UserModel> {
     id!: number;
 
     @Column(DataType.STRING)
-    userMail!: string;
+    email!: string;
 
     @Column(DataType.STRING)
-    userPassword!: string;
+    password!: string;
+
+    @Column(DataType.ENUM('user', 'admin'))
+    type!: Roles;
+
+    @Column(DataType.TINYINT)
+    active!: number;
 }

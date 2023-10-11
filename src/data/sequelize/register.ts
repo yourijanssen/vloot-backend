@@ -1,4 +1,4 @@
-import { User } from '../../business/model/user';
+import { Roles, User } from '../../business/model/user';
 import { UserModel } from '../../util/database/sequelize/models/user';
 import { RegisterDatabaseInterface } from '../interfaces/register';
 
@@ -10,26 +10,29 @@ export class RegisterSequelizeDatabase implements RegisterDatabaseInterface {
     /**
      * @author Youri Janssen
      * Creates a new user with the provided email and password in the SQL database.
-     * @param {string} userMail - The user's email address.
-     * @param {string} userPassword - The user's password.
+     * @param {string} email - The user's email address.
+     * @param {string} password - The user's password.
      * @returns {Promise<boolean>} A Promise that resolves to `true` if the user was created successfully, or `false` on failure.
      */
     public async createUser(
-        userMail: string,
-        userPassword: string
+        email: string,
+        password: string,
+        type: Roles,
+        active: number
     ): Promise<boolean> {
-      console.log('seq called')
         const saltRounds = 10; // You can adjust the number of salt rounds as needed
 
         try {
             const hashedPassword = await User.hashPassword(
-                userPassword,
+                password,
                 saltRounds
             );
 
             await UserModel.create({
-                userMail,
-                userPassword: hashedPassword,
+                email,
+                password: hashedPassword,
+                type,
+                active,
             } as UserModel);
 
             return true;
@@ -41,18 +44,23 @@ export class RegisterSequelizeDatabase implements RegisterDatabaseInterface {
     /**
      * @author Youri Janssen
      * Find a user by email address.
-     * @param {string} userMail - The email address to search for.
+     * @param {string} email - The email address to search for.
      * @returns {Promise<User | null>} A Promise that resolves with the user if found, or `null` if not found.
      */
-    public async getUserByMail(userMail: string): Promise<User | null> {
+    public async getUserByMail(email: string): Promise<User | null> {
         const user = await UserModel.findOne({
             where: {
-                userMail: userMail,
+                email: email,
             },
         });
         if (user === null) {
             return null;
         }
-        return User.createUser(user.userMail, user.userPassword);
+        return User.createUser(
+            user.email,
+            user.password,
+            user.type,
+            user.active
+        );
     }
 }

@@ -1,81 +1,72 @@
-import sinon, { SinonStub } from 'sinon';
+import sinon from 'sinon';
 import { expect } from 'chai';
 import { RegisterService } from '../../src/business/service/register';
-import { createRegisterServiceWithStubs } from './helper/integrationHelper';
-import { User } from '../../src/business/model/user';
+import { Roles, User } from '../../src/business/model/user';
+import { RegisterSequelizeDatabase } from '../../src/data/sequelize/register';
 
 /**
  * @author Youri Janssen
  * Integration Tests: RegisterService
  */
-describe('Integration Tests: RegisterService', () => {
+describe('Integration Tests: RegisterService', async () => {
     let registerService: RegisterService;
-    let createUserStub: SinonStub;
-    let getUserByMailStub: SinonStub;
+    let createUserStub: sinon.SinonStub;
+    let getUserByMailStub: sinon.SinonStub;
 
-    /**
-     * Initialize stubs and the RegisterService instance before each test.
-     */
     beforeEach(() => {
-        const stubs = createRegisterServiceWithStubs();
-        registerService = stubs.registerService;
-        createUserStub = stubs.createUserStub;
-        getUserByMailStub = stubs.getUserByMailStub;
+        createUserStub = sinon.stub(
+            RegisterSequelizeDatabase.prototype,
+            'createUser'
+        );
+        getUserByMailStub = sinon.stub(
+            RegisterSequelizeDatabase.prototype,
+            'getUserByMail'
+        );
+        registerService = new RegisterService(new RegisterSequelizeDatabase());
     });
 
-    /**
-     * Restore stubs after each test.
-     */
     afterEach(() => {
-        sinon.restore();
+        createUserStub.restore();
+        getUserByMailStub.restore();
     });
 
     it('should create a user successfully', async () => {
-        // Stub the getUserByMail method to return null (user does not exist)
         getUserByMailStub.resolves(null);
-
-        // Stub the createUser method to return true (successful registration)
         createUserStub.resolves(true);
-
         const result = await registerService.createUser(
             'test@example.com',
-            'Test123!'
+            'Test123!',
+            Roles.USER,
+            1
         );
-
-        // Assert that the result is true (successful registration)
         expect(result).to.equal(true);
     });
-
     it('should handle user validation errors', async () => {
-        // Stub the getUserByMail method to return null (user does not exist)
         getUserByMailStub.resolves(null);
-
-        // Stub the createUser method to return validation errors (array)
         createUserStub.resolves(['Invalid email', 'Invalid password']);
 
         const result = await registerService.createUser(
             'invalid-email',
-            'invalid-password'
+            'invalid-password',
+            Roles.USER,
+            1
         );
-
-        // Assert that the result is an array containing validation errors
         expect(result)
             .to.be.an('array')
             .that.includes('Invalid email', 'Invalid password');
     });
 
     it('should handle user existence check', async () => {
-        // Stub the getUserByMail method to return an existing user
         getUserByMailStub.resolves(
-            User.createUser('test@example.com', 'Test123!')
+            User.createUser('test@example.com', 'Test123!', Roles.USER, 1)
         );
-
+        createUserStub.resolves('user_exists');
         const result = await registerService.createUser(
             'test@example.com',
-            'Test123!'
+            'Test123!',
+            Roles.USER,
+            1
         );
-
-        // Assert that the result is 'user_exists'
         expect(result).to.equal('user_exists');
     });
 });

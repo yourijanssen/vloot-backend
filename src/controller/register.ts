@@ -1,5 +1,7 @@
 import { RegisterService } from '../business/service/register';
 import express from 'express';
+import { type } from 'os';
+import { Roles, User } from '../business/model/user';
 
 /**
  * @author Youri Janssen
@@ -24,14 +26,20 @@ export class RegisterController {
         request: express.Request,
         response: express.Response
     ): Promise<void> {
-      console.log('controller called')
         // Extract user data from the request body
-        const userMail = request.body.userMail;
-        const userPassword = request.body.userPassword;
+        const email = request.body.email;
+        const password = request.body.password;
+        const type: Roles = Roles.USER;
+        const active = 1;
 
         // Attempt to create the user
         const userCreationResult: boolean | string[] | 'user_exists' =
-            await this.registerService.createUser(userMail, userPassword);
+            await this.registerService.createUser(
+                email,
+                password,
+                type,
+                active
+            );
 
         if (typeof userCreationResult === 'boolean') {
             // User created successfully

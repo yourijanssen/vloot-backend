@@ -40,18 +40,25 @@ class Server {
         /* The port number on which the server will listen. */
         this.port = parseInt(process.env.PORT || '3002', 10);
 
-        /* The database configuration based on the DB_TYPE environment variable. */
+        // Use an environment variable to determine if it's test mode
+        const isTestMode = process.env.TEST_MODE === 'true';
+
+        // Depending on the mode, set the database instance
         this.database =
-            process.env.DB_TYPE === 'sql'
-                ? SQLDatabaseConfig.getInstance()
-                : SequelizeDatabaseConfig.getInstance();
+            isTestMode || process.env.DB_TYPE !== 'sql'
+                ? SequelizeDatabaseConfig.getInstance()
+                : SQLDatabaseConfig.getInstance();
 
         /* Configure middleware and route handler. */
         this.configureMiddleware();
         this.configureRouteHandler();
 
-        /* Start the server after syncing the database. */
-        this.startServer();
+        // Conditionally execute syncDatabase based on test mode
+        if (!isTestMode && this.database instanceof SequelizeDatabaseConfig) {
+            this.startServerWithDatabaseSync();
+        } else {
+            this.startServer();
+        }
     }
 
     /**
@@ -89,17 +96,19 @@ class Server {
         this.app.use(this.routeHandler.assignRouteHandler());
     }
 
+    private async startServerWithDatabaseSync() {
+        /* Synchronize the database before starting the server if it's a Sequelize database. */
+        if (this.database instanceof SequelizeDatabaseConfig) {
+            await this.database.syncDatabase();
+        }
+
+        this.startServer();
+    }
     /**
      * @author Youri Janssen
      * Starts the Express server.
      */
     public async startServer() {
-
-        /* Synchronize the database before starting the server if it's a Sequelize database. */
-        if (this.database instanceof SequelizeDatabaseConfig) {
-            // await this.database.syncDatabase();
-        }
-
         /* Start the Express server.*/
         this.app.listen(this.port, () => {
             console.log(

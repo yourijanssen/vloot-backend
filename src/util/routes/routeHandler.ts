@@ -35,11 +35,8 @@ export class RouteHandler {
     /**
      * @author Youri Janssen
      * Initializes the register controller based on the database type and loads routes.
-     * @param {RegisterService | null} registerService - Optional RegisterService instance to use for testing purposes.
      */
-    public initRegisterController(
-        registerService: RegisterService | null = null
-    ): void {
+    public initRegisterController(): void {
         let database: RegisterDatabaseInterface;
 
         if (process.env.DB_TYPE === 'sql') {
@@ -47,12 +44,7 @@ export class RouteHandler {
         } else {
             database = new RegisterSequelizeDatabase();
         }
-
-        let usedService: RegisterService = new RegisterService(database);
-
-        if (registerService !== null) {
-            usedService = registerService;
-        }
+        const usedService: RegisterService = new RegisterService(database);
         const registerController = new RegisterController(usedService);
         this.loadRegisterAPI(registerController);
     }
@@ -62,7 +54,6 @@ export class RouteHandler {
      * @param {RegisterController} registerController - loads route for the register controller.
      */
     private loadRegisterAPI(registerController: RegisterController): void {
-      console.log(registerController)
         this.router.use(
             '/register',
             new RegisterRoutes(registerController).getRegisterRouter()
