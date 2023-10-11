@@ -1,8 +1,8 @@
 import { Sequelize } from 'sequelize-typescript';
 import config from 'dotenv';
-import { UserModel } from '../../models';
 import { Dialect } from 'sequelize/types/sequelize';
 import { Test } from './models/test_endpoint';
+import { UserModel } from './models/user';
 
 // Initialize environment variables from a .env file.
 config.config();
