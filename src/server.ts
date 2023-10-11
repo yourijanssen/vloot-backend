@@ -1,7 +1,7 @@
 import express from 'express';
 import { SQLDatabaseConfig } from './util/database/mysql/mysql';
 import { SequelizeDatabaseConfig } from './util/database/sequelize/sequelize';
-import { RouteHandler } from './util/routes/routeHandler';
+import { RouteHandler } from './util/routeHandler';
 
 /**
  * @author Youri Janssen

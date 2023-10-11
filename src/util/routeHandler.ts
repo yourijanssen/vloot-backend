@@ -1,10 +1,10 @@
 import express, { Router } from 'express';
-import { RegisterController } from '../../controller/register';
-import { RegisterDatabaseInterface } from '../../data/interfaces/register';
-import { RegisterSequelizeDatabase } from '../../data/sequelize/register';
-import { RegisterMysqlDatabase } from '../../data/mysql/register';
-import { RegisterService } from '../../business/service/register';
-import { RegisterRoutes } from './register';
+import { RegisterController } from '../controller/register';
+import { RegisterDatabaseInterface } from '../data/interfaces/register';
+import { RegisterSequelizeDatabase } from '../data/sequelize/register';
+import { RegisterMysqlDatabase } from '../data/mysql/register';
+import { RegisterService } from '../business/service/register';
+import { RegisterRoutes } from './routes/register';
 
 /**
  * @author Youri Janssen
