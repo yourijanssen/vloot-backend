@@ -5,11 +5,6 @@ import { RegisterSequelizeDatabase } from '../data/sequelize/register';
 import { RegisterMysqlDatabase } from '../data/mysql/register';
 import { RegisterService } from '../business/service/register';
 import { RegisterRoutes } from './routes/register';
-import { TestEndpointController } from '../controller/test_endpoint';
-import { TestEndpointRoutes } from './routes/test_endpoint';
-import { TestEndpointService } from '../business/service/test_endpoint';
-import { TestEndpointDatabaseInterface } from '../data/interfaces/test_endpoint';
-import { TestEndpointSequelizeDatabase } from '../data/sequelize/test_endpoint';
 
 /**
  * @author Youri Janssen
@@ -25,7 +20,6 @@ export class RouteHandler {
     constructor() {
         this.testRoute();
         this.initRegisterController();
-        this.initTestEndpointController();
     }
 
     /**
@@ -63,34 +57,6 @@ export class RouteHandler {
         this.router.use(
             '/register',
             new RegisterRoutes(registerController).getRegisterRouter()
-        );
-    }
-
-    /**
-     * Initializes the TestEndpointController based on the database type and loads routes.
-     * @param {RegisterService | null} registerService - Optional RegisterService instance to use for testing purposes.
-     */
-    public initTestEndpointController(
-        registerService: TestEndpointService | null = null
-    ): void {
-        const database: TestEndpointDatabaseInterface = new TestEndpointSequelizeDatabase();
-
-        let usedService: TestEndpointService = new TestEndpointService(database);
-
-        if (registerService !== null) {
-            usedService = registerService;
-        }
-        const testEndpointController: TestEndpointController = new TestEndpointController(usedService);
-        this.loadTestEndpointRoutes(testEndpointController);
-    }
-
-    /**
-     * @param {RegisterController} testEndpointController - loads route for the register controller.
-     */
-    private loadTestEndpointRoutes(testEndpointController: TestEndpointController): void {
-        this.router.use(
-            '/test',
-            new TestEndpointRoutes(testEndpointController).getRouter()
         );
     }
 

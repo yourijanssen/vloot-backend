@@ -1,7 +1,6 @@
 import { Sequelize } from 'sequelize-typescript';
 import config from 'dotenv';
 import { Dialect } from 'sequelize/types/sequelize';
-import { Test } from './models/test_endpoint';
 import { UserModel } from './models/user';
 
 // Initialize environment variables from a .env file.
@@ -66,7 +65,7 @@ export class SequelizeDatabaseConfig {
      */
     public async syncDatabase(): Promise<void> {
         try {
-            SequelizeDatabaseConfig.sequelize.addModels([UserModel, Test]);
+            SequelizeDatabaseConfig.sequelize.addModels([UserModel]);
             await SequelizeDatabaseConfig.sequelize.sync(); // { force: true }
             console.log('Database synced successfully');
         } catch (error) {
